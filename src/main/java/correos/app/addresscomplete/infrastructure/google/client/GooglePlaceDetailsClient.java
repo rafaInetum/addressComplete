@@ -6,6 +6,7 @@ import correos.app.addresscomplete.domain.model.AddressInput;
 import correos.app.addresscomplete.domain.model.AddressParts;
 import correos.app.addresscomplete.domain.model.ScoredAddress;
 import correos.app.addresscomplete.domain.service.SuggestionRanker;
+import correos.app.addresscomplete.infrastructure.google.config.GoogleApiProps;
 import correos.app.addresscomplete.infrastructure.google.config.GooglePlaceDetailsProps;
 import correos.app.addresscomplete.infrastructure.google.parser.AddressPartsParser;
 import correos.app.addresscomplete.infrastructure.google.parser.PlaceDetailsParser;
@@ -25,7 +26,8 @@ public class GooglePlaceDetailsClient {
 
     private final RestTemplate restTemplate;
     private final ObjectMapper mapper;
-    private final GooglePlaceDetailsProps props;
+    private final GooglePlaceDetailsProps googlePlaceDetailsProps;
+    private final GoogleApiProps googleApiProps;
     private final PlaceDetailsParser parser;
     private final SuggestionRanker ranker;
     private final AddressPartsParser addressPartsParser;
@@ -33,16 +35,18 @@ public class GooglePlaceDetailsClient {
     public GooglePlaceDetailsClient(
             RestTemplate restTemplate,
             ObjectMapper mapper,
-            GooglePlaceDetailsProps props,
+            GooglePlaceDetailsProps googlePlaceDetailsProps,
             PlaceDetailsParser parser,
             SuggestionRanker ranker,
-            AddressPartsParser addressPartsParser) {
+            AddressPartsParser addressPartsParser,
+            GoogleApiProps googleApiProps) {
         this.restTemplate = restTemplate;
         this.mapper = mapper;
-        this.props = props;
+        this.googlePlaceDetailsProps = googlePlaceDetailsProps;
         this.parser = parser;
         this.ranker = ranker;
         this.addressPartsParser = addressPartsParser;
+        this.googleApiProps = googleApiProps;
     }
 
 
@@ -79,11 +83,11 @@ public class GooglePlaceDetailsClient {
 
     private String buildUrl(String placeId) {
         return UriComponentsBuilder
-                .fromHttpUrl(props.baseUrl())
+                .fromHttpUrl(googlePlaceDetailsProps.baseUrl())
                 .queryParam("place_id", placeId)
                 .queryParam("fields", "formatted_address,address_components")
                 .queryParam("language", "es")
-                .queryParam("key", props.apiKey())
+                .queryParam("key", googleApiProps.apiKey())
                 .toUriString();
     }
 }

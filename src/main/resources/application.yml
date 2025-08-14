@@ -1,8 +1,7 @@
 google:
+  api-key: AIzaSyBKAgzBLMAY4mqQIaNM9SGAw4Hnoyr1QJ8
   places:
     autocomplete:
-        base-url: https://maps.googleapis.com/maps/api/place/autocomplete/json
-        api-key: AIzaSyBKAgzBLMAY4mqQIaNM9SGAw4Hnoyr1QJ8
+      base-url: https://maps.googleapis.com/maps/api/place/autocomplete/json
     details:
-        base-url: https://maps.googleapis.com/maps/api/place/details/json
-        api-key: AIzaSyBKAgzBLMAY4mqQIaNM9SGAw4Hnoyr1QJ8
+      base-url: https://maps.googleapis.com/maps/api/place/details/json

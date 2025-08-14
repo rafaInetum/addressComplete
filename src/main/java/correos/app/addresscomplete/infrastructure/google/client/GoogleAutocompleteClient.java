@@ -1,17 +1,15 @@
 package correos.app.addresscomplete.infrastructure.google.client;
 
 import correos.app.addresscomplete.domain.model.AddressInput;
+import correos.app.addresscomplete.infrastructure.google.config.GoogleApiProps;
 import correos.app.addresscomplete.infrastructure.google.config.GoogleAutocompletePlacesProps;
 import org.json.JSONArray;
 import org.json.JSONObject;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
 
-import java.net.URLEncoder;
-import java.nio.charset.StandardCharsets;
 import java.util.List;
 import java.util.stream.IntStream;
 
@@ -19,11 +17,16 @@ import java.util.stream.IntStream;
 public class GoogleAutocompleteClient {
 
     private final RestTemplate restTemplate;
-    private final GoogleAutocompletePlacesProps props;
+    private final GoogleAutocompletePlacesProps autoCompleteApiProps;
+    private final GoogleApiProps googleApiProps;
 
-    public GoogleAutocompleteClient(RestTemplate restTemplate, GoogleAutocompletePlacesProps props) {
+    public GoogleAutocompleteClient(
+            RestTemplate restTemplate,
+            GoogleAutocompletePlacesProps autoCompleteApiProps,
+            GoogleApiProps googleApiProps) {
         this.restTemplate = restTemplate;
-        this.props = props;
+        this.autoCompleteApiProps = autoCompleteApiProps;
+        this.googleApiProps = googleApiProps;
     }
 
     public List<String> fetchPlaceIdsJson(AddressInput address) {
@@ -35,12 +38,12 @@ public class GoogleAutocompleteClient {
 
     public List<String> fetchPlaceIds(String originalAddress) {
         try {
-            String url = UriComponentsBuilder.fromHttpUrl(props.baseUrl())
+            String url = UriComponentsBuilder.fromHttpUrl(autoCompleteApiProps.baseUrl())
                     .queryParam("input", originalAddress)
                     .queryParam("types", "address")
                     .queryParam("language", "es")
                     .queryParam("components", "country:es")
-                    .queryParam("key", props.apiKey())
+                    .queryParam("key", googleApiProps.apiKey())
                     .toUriString();
 
             ResponseEntity<String> response = restTemplate.getForEntity(url, String.class);

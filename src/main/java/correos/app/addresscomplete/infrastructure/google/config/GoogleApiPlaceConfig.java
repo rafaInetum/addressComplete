@@ -10,7 +10,7 @@ import org.springframework.web.client.RestTemplate;
 import java.time.Duration;
 
 @Configuration
-@EnableConfigurationProperties({ GoogleAutocompletePlacesProps.class, GooglePlaceDetailsProps.class })
+@EnableConfigurationProperties({ GoogleAutocompletePlacesProps.class, GooglePlaceDetailsProps.class, GoogleApiProps.class })
 public class GoogleApiPlaceConfig {
     @Bean
     public RestTemplate googleRestTemplate(RestTemplateBuilder builder) {
