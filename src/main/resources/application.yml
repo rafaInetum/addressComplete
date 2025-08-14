@@ -1,7 +1,11 @@
 google:
-  api-key: AIzaSyBKAgzBLMAY4mqQIaNM9SGAw4Hnoyr1QJ8
+  api-key: ${GOOGLE_API_KEY}
   places:
     autocomplete:
       base-url: https://maps.googleapis.com/maps/api/place/autocomplete/json
     details:
       base-url: https://maps.googleapis.com/maps/api/place/details/json
+
+spring:
+  config:
+    import: optional:classpath:application-local.yml

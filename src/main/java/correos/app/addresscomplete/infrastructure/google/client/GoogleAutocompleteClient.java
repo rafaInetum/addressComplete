@@ -10,6 +10,8 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
 
+import java.net.URI;
+import java.nio.charset.StandardCharsets;
 import java.util.List;
 import java.util.stream.IntStream;
 
@@ -38,15 +40,17 @@ public class GoogleAutocompleteClient {
 
     public List<String> fetchPlaceIds(String originalAddress) {
         try {
-            String url = UriComponentsBuilder.fromHttpUrl(autoCompleteApiProps.baseUrl())
+            URI uri = UriComponentsBuilder.fromHttpUrl(autoCompleteApiProps.baseUrl())
                     .queryParam("input", originalAddress)
                     .queryParam("types", "address")
                     .queryParam("language", "es")
                     .queryParam("components", "country:es")
                     .queryParam("key", googleApiProps.apiKey())
-                    .toUriString();
+                    .build()
+                    .encode(StandardCharsets.UTF_8)
+                    .toUri();
 
-            ResponseEntity<String> response = restTemplate.getForEntity(url, String.class);
+            ResponseEntity<String> response = restTemplate.getForEntity(uri, String.class);
             JSONArray predictions = new JSONObject(response.getBody()).getJSONArray("predictions");
 
             return IntStream.range(0, predictions.length())
