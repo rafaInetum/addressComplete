@@ -1,8 +1,8 @@
 package correos.app.addresscomplete.api.controller;
 
-import correos.app.addresscomplete.application.usecase.CompletedAddressUseCaseImpl;
+import correos.app.addresscomplete.application.service.CompletedAddressService;
 import correos.app.addresscomplete.domain.model.AddressInput;
-import correos.app.addresscomplete.domain.port.in.CompletedAddressUseCase;
+import correos.app.addresscomplete.application.port.in.CompletedAddressUseCase;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.ResponseEntity;
@@ -19,7 +19,7 @@ public class AddressCompleteController {
 
     private final CompletedAddressUseCase useCase;
 
-    public AddressCompleteController(CompletedAddressUseCaseImpl useCase) {
+    public AddressCompleteController(CompletedAddressUseCase useCase) {
         this.useCase = useCase;
     }
 

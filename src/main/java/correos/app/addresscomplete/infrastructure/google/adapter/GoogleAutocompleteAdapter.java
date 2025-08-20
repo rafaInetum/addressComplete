@@ -1,7 +1,7 @@
 package correos.app.addresscomplete.infrastructure.google.adapter;
 
 import correos.app.addresscomplete.domain.model.AddressInput;
-import correos.app.addresscomplete.domain.port.out.AutocompletePort;
+import correos.app.addresscomplete.application.port.out.AutocompletePort;
 import correos.app.addresscomplete.infrastructure.google.client.GoogleAutocompleteClient;
 import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Component;

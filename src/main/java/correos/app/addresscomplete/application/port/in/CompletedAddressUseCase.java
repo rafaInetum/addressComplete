@@ -1,4 +1,4 @@
-package correos.app.addresscomplete.domain.port.in;
+package correos.app.addresscomplete.application.port.in;
 
 import correos.app.addresscomplete.domain.model.AddressInput;
 

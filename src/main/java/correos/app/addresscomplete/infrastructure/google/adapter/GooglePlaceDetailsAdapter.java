@@ -1,7 +1,7 @@
 package correos.app.addresscomplete.infrastructure.google.adapter;
 
 import correos.app.addresscomplete.domain.model.AddressInput;
-import correos.app.addresscomplete.domain.port.out.PlaceDetailsPort;
+import correos.app.addresscomplete.application.port.out.PlaceDetailsPort;
 import correos.app.addresscomplete.infrastructure.google.client.GooglePlaceDetailsClient;
 import org.springframework.stereotype.Component;
 
