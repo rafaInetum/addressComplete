@@ -58,7 +58,7 @@ public class GoogleAutocompleteClient {
                     .toList();
 
         } catch (Exception e) {
-            throw new RuntimeException("Error al obtener placeIds: " + e.getMessage(), e);
+            throw new RuntimeException("Error al obtener placeIds : " + e.getMessage(), e);
         }
     }
 }
